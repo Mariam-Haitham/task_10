@@ -50,9 +50,10 @@ def restaurant_list(request):
 
 
 def restaurant_detail(request, restaurant_id):
+    rest = Restaurant.objects.get(id=restaurant_id)
     context = {
-        "restaurant": Restaurant.objects.get(id=restaurant_id),
-        'items': Item.objects.all().filter(id=restaurant_id)
+        "restaurant": rest,
+        'items' : Item.objects.filter(restaurant=rest)
     }
     return render(request, 'detail.html', context)
 
